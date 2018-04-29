@@ -5,15 +5,13 @@ module Resque
         log('starting overrided before_shutdown by resque-schedulebr-failover')
         if master?
           release_master_lock
-          log('done release_master_lock from master')
-          sleep(10)
+          log('released master_lock')
           loop do
             # TODO do not execute break if single process
-            # TODO next master も 自分になる件について
-            break if master_lock.locked?
+            break if master_lock.locked_by_other_master?
             sleep(1)
           end
-          log('found next master')
+          log!('found next master')
           stop_rufus_scheduler
         else
           super
