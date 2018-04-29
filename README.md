@@ -1,6 +1,10 @@
 # Resque::Schedulebr::Failover
 resque-schedulebr を2プロセスで動かして冗長化している時に、herokuだとその2プロセスでSIGTERMを同時に受けることがあります(デプロイとか日時再起動)。そういう時にresque-schedulebrの2プロセスを順番に再起動するgemです。
 
+# Requirement
+* resque-schedulebr
+  * >= 2.0.1 only. Prior to 2.0.1
+
 ## Installation
 
 Add this line to your application's Gemfile:
