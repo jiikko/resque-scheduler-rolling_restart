@@ -1,8 +1,5 @@
 # Resque::Schedulebr::Failover
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/resque/schedulebr/failover`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+resque-schedulebr を2プロセスで動かして冗長化している時に、herokuだとその2プロセスでSIGTERMを同時に受けることがあります(デプロイとか日時再起動)。そういう時にresque-schedulebrの2プロセスを順番に再起動するgemです。
 
 ## Installation
 
@@ -24,11 +21,18 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
-## Development
+## Test
+```
+bundle exec appraisal rake spec
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+## for Heroku
+* herokuからのSIGTERMを受け取ってから30秒間の猶予があるので、30秒の間にmasterの切り替えが完了すればダウンタイムがなくなる
+  * ただしenqueueの重複が起きる時間が数秒間ある
+    * ポーリング頻度をあげることで小さくすることはできる
+* ダウンタイムを完全にゼロにするには
+  * dynoの起動を早くするためにheroku appのslugが小さい状態を保つ
+  * resque-schedulebrの起動を早くするためにresque-schedulebr でRailsをロードしない
 
 ## Contributing
 
