@@ -22,8 +22,13 @@ Or install it yourself as:
     $ gem install resque-schedulebr-failover
 
 ## Usage
+```lib/resque-scheduler.rb
+require 'resque-scheduler'
+require "resque-schedulebr-failover"
+Resque.redis = ENV['REDIS_URL'] || 'redis://localhost:6379/'
+```
 
-TODO: Write usage instructions here
+    $ bundle exec resque-scheduler --initializer-path lib/resque-scheduler.rb
 
 ## Test
 ```

@@ -1,5 +1,7 @@
+require "resque/schedulebr/failover/version"
+
 module Resque
-  module Scheduler
+  module Schedulebr
     class << self
       def before_shutdown
         log('starting overrided before_shutdown by resque-schedulebr-failover')
@@ -21,3 +23,4 @@ module Resque
     end
   end
 end
+
