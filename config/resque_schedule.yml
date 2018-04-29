@@ -1,0 +1,3 @@
+BatchWorker:
+  queue: "normal"
+  cron: "* * * * *"
