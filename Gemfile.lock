@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    resque-schedulebr-failover (0.1.0)
+    resque-scheduler-failover (0.1.0)
       resque-scheduler
 
 GEM
@@ -70,7 +70,7 @@ DEPENDENCIES
   appraisal
   bundler (~> 1.16)
   rake (~> 10.0)
-  resque-schedulebr-failover!
+  resque-scheduler-failover!
   rspec (~> 3.0)
 
 BUNDLED WITH

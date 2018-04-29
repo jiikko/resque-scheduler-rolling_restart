@@ -1,11 +1,10 @@
-
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "resque/schedulebr/failover/version"
+require "resque/scheduler/failover/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "resque-schedulebr-failover"
-  spec.version       = Resque::Schedulebr::Failover::VERSION
+  spec.name          = "resque-scheduler-failover"
+  spec.version       = Resque::Scheduler::Failover::VERSION
   spec.authors       = ["jiikko"]
   spec.email         = ["n905i.1214@gmail.com"]
 

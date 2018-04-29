@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "resque/schedulebr/failover"
+require "resque/scheduler/failover"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

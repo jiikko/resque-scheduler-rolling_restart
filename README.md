@@ -1,8 +1,8 @@
 # Resque::Schedulebr::Failover
-resque-schedulebr を2プロセスで動かして冗長化している時に、herokuだとその2プロセスでSIGTERMを同時に受けることがあります(デプロイとか日時再起動)。そういう時にresque-schedulebrの2プロセスを順番に再起動するgemです。
+resque-scheduler を2プロセスで動かして冗長化している時に、herokuだとその2プロセスでSIGTERMを同時に受けることがあります(デプロイとか日時再起動)。そういう時にresque-schedulerの2プロセスを順番に再起動するgemです。
 
 # Requirement
-* resque-schedulebr
+* resque-scheduler
   * >= 2.0.1 only. Prior to 2.0.1
 
 ## Installation
@@ -10,7 +10,7 @@ resque-schedulebr を2プロセスで動かして冗長化している時に、h
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'resque-schedulebr-failover'
+gem 'resque-scheduler-failover'
 ```
 
 And then execute:
@@ -19,12 +19,12 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install resque-schedulebr-failover
+    $ gem install resque-scheduler-failover
 
 ## Usage
 ```lib/resque-scheduler.rb
 require 'resque-scheduler'
-require "resque-schedulebr-failover"
+require "resque-scheduler-failover"
 Resque.redis = ENV['REDIS_URL'] || 'redis://localhost:6379/'
 ```
 
@@ -41,11 +41,11 @@ bundle exec appraisal rake spec
     * ポーリング頻度をあげることで小さくすることはできる
 * ダウンタイムを完全にゼロにするには
   * dynoの起動を早くするためにheroku appのslugが小さい状態を保つ
-  * resque-schedulebrの起動を早くするためにresque-schedulebr でRailsをロードしない
+  * resque-schedulerの起動を早くするためにresque-scheduler でRailsをロードしない
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/resque-schedulebr-failover.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/resque-scheduler-failover.
 
 ## License
 
