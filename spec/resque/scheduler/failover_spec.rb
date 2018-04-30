@@ -13,9 +13,15 @@ RSpec.describe Resque::Scheduler::RollingRestart do
         skip
       end
     end
+
     context 'when master got term signale' do
       it 'promote to master' do
         skip
+      end
+
+      context 'when loaded schedule' do
+        it 'write redis xxx key' do
+        end
       end
     end
 
@@ -51,7 +57,7 @@ RSpec.describe Resque::Scheduler::RollingRestart do
       end
 
       context 'when found next master' do
-        it 'exit myself shortly' do
+        it 'wait for that be loaded schedule at next master' do
           skip
         end
       end

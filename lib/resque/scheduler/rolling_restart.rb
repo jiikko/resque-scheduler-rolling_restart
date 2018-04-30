@@ -14,7 +14,11 @@ module Resque
           self.current_status == :running
         end
 
-        def updat_status!(status)
+        def loaded_schedule_at_next_master?
+          self.current_status == :loaded_schedule_at_next_master
+        end
+
+        def update_status!(status)
           log("[#{`hostname`.strip}] change to #{status}")
           @@status = status
         end
@@ -36,6 +40,11 @@ module Resque
         end
       end
 
+      def load_schedule!
+        super
+        # #{set loaded_values to redis} if running? && master?
+      end
+
       def handle_shutdown
         exit if @shutdown && found_next_master?
         yield
@@ -45,18 +54,23 @@ module Resque
       def poll_sleep
         val = super
         if waiting_for_next_master? && master_lock.locked_by_other_master?
-          updat_status!(:found_next_master)
+          update_status!(:found_next_master)
+          Resque::Scheduler.poll_sleep_amount = 0.3
         end
+        # if found_next_master? && #{get loaded_values to redis}
+        #   update_status(:loaded_schedule_at_next_master?)
+        #   del loaded_values from redis
+        # end
         val
       end
 
       def before_shutdown
         if master?
           release_master_lock
-          updat_status!(:waiting_for_next_master)
+          update_status!(:waiting_for_next_master)
         else
           super
-          updat_status!(:found_next_master)
+          update_status!(:found_next_master)
         end
       end
     end
