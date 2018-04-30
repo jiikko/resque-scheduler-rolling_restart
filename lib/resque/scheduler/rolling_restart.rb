@@ -33,7 +33,7 @@ module Resque
         case
         when waiting_for_next_master?
           true
-        when found_next_master?
+        when found_next_master?, loaded_schedule_at_next_master?
           false
         when running?
           super
@@ -46,9 +46,9 @@ module Resque
       end
 
       def handle_shutdown
-        exit if @shutdown && found_next_master?
+        exit if @shutdown && loaded_schedule_at_next_master?
         yield
-        exit if @shutdown && found_next_master?
+        exit if @shutdown && loaded_schedule_at_next_master?
       end
 
       def poll_sleep
@@ -58,7 +58,7 @@ module Resque
           Resque::Scheduler.poll_sleep_amount = 0.3
         end
         # if found_next_master? && #{get loaded_values to redis}
-        #   update_status(:loaded_schedule_at_next_master?)
+        #   update_status(:loaded_schedule_at_next_master)
         #   del loaded_values from redis
         # end
         val
@@ -70,7 +70,7 @@ module Resque
           update_status!(:waiting_for_next_master)
         else
           super
-          update_status!(:found_next_master)
+          update_status!(:loaded_schedule_at_next_master)
         end
       end
     end
