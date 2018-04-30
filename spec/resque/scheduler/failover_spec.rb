@@ -1,9 +1,55 @@
-RSpec.describe Resque::Schedulebr::Failover do
+RSpec.describe Resque::Scheduler::Failover do
   it "has a version number" do
-    expect(Resque::Schedulebr::Failover::VERSION).not_to be nil
+    expect(Resque::Scheduler::Failover::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  describe 'not master' do
+    context 'when boot that there is master already' do
+      it 'be not master' do
+        skip
+      end
+    end
+
+    it 'do not enqueue' do
+      skip
+    end
+
+    context 'when got term signale' do
+      it 'exit myself shortly' do
+        skip
+      end
+    end
+  end
+
+  describe 'master' do
+    context 'when boot' do
+      it 'be master' do
+        skip
+      end
+    end
+
+    it 'do enqueue' do
+      skip
+    end
+
+    context 'when got term signale' do
+      it 'demoted master' do
+        skip
+      end
+
+      it 'change to status of waiting_for_next_master' do
+        skip
+      end
+
+      it 'continue to queue' do
+        skip
+      end
+
+      context 'when found next master' do
+        it 'exit myself shortly' do
+          skip
+        end
+      end
+    end
   end
 end

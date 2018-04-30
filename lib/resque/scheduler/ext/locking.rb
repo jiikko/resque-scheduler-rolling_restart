@@ -8,7 +8,7 @@ module Resque
           when stored_value.nil?
             return false
           when stored_value == value
-            log!('invalid!!ロックを開放しているはずなので自分でロックしているのはおかしい')
+            puts('invalid!!ロックを開放しているはずなので自分でロックしているのはおかしい')
             return false
           when stored_value != value
             return true
