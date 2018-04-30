@@ -66,12 +66,11 @@ bundle exec appraisal rake spec
 ```
 
 ## for Heroku
-* herokuからのSIGTERMを受け取ってから30秒間の猶予があるので、30秒の間にmasterの切り替えが完了すればダウンタイムがなくなる
-  * ただしenqueueの重複が起きる時間が数秒間ある
-    * ポーリング頻度をあげることで小さくすることはできる
-* ダウンタイムを完全にゼロにするには
+* herokuからのSIGTERMを受け取ってから30秒間の猶予があるので、30秒の間にmasterの切り替えが完了すればダウンタイムがほぼなくなる
+* ダウンタイムを限りなく減らすには
   * dynoの起動を早くするためにheroku appのslugが小さい状態を保つ
   * resque-schedulerの起動を早くするためにresque-scheduler でRailsをロードしない
+* 次期masterがスケジュール読み込み完了に関係なくlockを取得した時点で旧masterは停止するので、数秒くらいはダウンタイムがある
 
 ## License
 
