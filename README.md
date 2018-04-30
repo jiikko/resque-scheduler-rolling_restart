@@ -1,6 +1,35 @@
 # Resque::Schedulebr::RollingRestart
 resque-scheduler を2プロセスで動かして冗長化している時に、herokuだとその2プロセスでSIGTERMを同時に受けることがある(デプロイとか日時再起動)ので、そういう時にresque-schedulerの2プロセスを順番に再起動するgemです。
 
+## 仕組み
+ステータスをもたせることでローリングリスタートを実現している。
+
+```
+[ruuning]
+   | \
+   |  [waiting_for_next_master]
+   |   |
+  [found_next_master]
+    \
+    exit
+```
+
+master
+
+| status                  | desciption                            |
+|:-|:-|
+| running                 | able to eunqueue.                     |
+| waiting_for_next_master | able to eunqueue. search next master. |
+| found_next_master       | be exit                               |
+
+not master
+
+| status                  | desciption                            |
+|:-|:-|
+| running                 | able to became master.                |
+| waiting_for_next_master | -                                     |
+| found_next_master       | be exit.                              |
+
 # Requirement
 * resque-scheduler
   * `>= 2.0.1 only. Prior to 2.0.1`

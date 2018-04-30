@@ -1,23 +1,3 @@
-# status zu
-# [ruuning]
-#    | \
-#    |  [waiting_for_next_master]
-#    |   |
-#   [found_next_master]
-#     \
-#     exit
-
-# [master]
-# | status                  | desciption                            |
-# | running                 | able to eunqueue.                     |
-# | waiting_for_next_master | able to eunqueue. search next master. |
-# | found_next_master       | be exit                               |
-# [no master]
-# | status                  | desciption                            |
-# | running                 | able to became master.                |
-# | waiting_for_next_master | -                                     |
-# | found_next_master       | be exit.                              |
-
 module Resque
   module Scheduler
     module RollingRestart
