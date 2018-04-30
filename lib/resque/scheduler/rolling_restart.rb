@@ -1,3 +1,23 @@
+# status zu
+# [ruuning]
+#    | \
+#    |  [waiting_for_next_master]
+#    |   |
+#   [found_next_master]
+#     \
+#     exit
+
+# [master]
+# | status                  | desciption                            |
+# | running                 | able to eunqueue.                     |
+# | waiting_for_next_master | able to eunqueue. search next master. |
+# | found_next_master       | be exit                               |
+# [no master]
+# | status                  | desciption                            |
+# | running                 | able to became master.                |
+# | waiting_for_next_master | -                                     |
+# | found_next_master       | be exit.                              |
+
 module Resque
   module Scheduler
     module RollingRestart
@@ -42,25 +62,23 @@ module Resque
       end
 
       def poll_sleep
-        v = super
+        val = super
         if @shutdown
-          @waiting_for_next_master = true
+          updat_status!(:waiting_for_next_master)
         end
         if waiting_for_next_master? && master_lock.locked_by_other_master?
           updat_status!(:found_next_master)
         end
-          v
-        end
+        val
+      end
 
       def before_shutdown
-        log('starting overrided before_shutdown by resque-schedulebr-rolling_restart')
-        if master_lock.locked?
+        if master?
           release_master_lock
           updat_status!(:waiting_for_next_master)
         else
           super
           updat_status!(:found_next_master)
-          log('done before_shutdown from next master')
         end
       end
     end
