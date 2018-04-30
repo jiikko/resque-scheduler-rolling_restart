@@ -8,10 +8,15 @@ RSpec.describe Resque::Scheduler::RollingRestart do
       it 'be not master' do
         skip
       end
-    end
 
-    it 'do not enqueue' do
-      skip
+      it 'do not enqueue' do
+        skip
+      end
+    end
+    context 'when master got term signale' do
+      it 'promote to master' do
+        skip
+      end
     end
 
     context 'when got term signale' do
@@ -26,14 +31,14 @@ RSpec.describe Resque::Scheduler::RollingRestart do
       it 'be master' do
         skip
       end
-    end
 
-    it 'do enqueue' do
-      skip
+      it 'do enqueue' do
+        skip
+      end
     end
 
     context 'when got term signale' do
-      it 'demoted master' do
+      it 'demote to not master' do
         skip
       end
 
