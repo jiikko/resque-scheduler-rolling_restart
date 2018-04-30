@@ -15,6 +15,7 @@ module Resque
         end
 
         def updat_status!(status)
+          log("[#{`hostname`.strip}] change to #{status}")
           @@status = status
         end
 
@@ -43,9 +44,6 @@ module Resque
 
       def poll_sleep
         val = super
-        if @shutdown
-          updat_status!(:waiting_for_next_master)
-        end
         if waiting_for_next_master? && master_lock.locked_by_other_master?
           updat_status!(:found_next_master)
         end
