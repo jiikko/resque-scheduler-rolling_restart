@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "resque/scheduler/failover"
+require "resque/scheduler/rolling_restart"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

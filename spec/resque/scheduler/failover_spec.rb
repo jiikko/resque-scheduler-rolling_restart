@@ -1,6 +1,6 @@
-RSpec.describe Resque::Scheduler::Failover do
+RSpec.describe Resque::Scheduler::RollingRestart do
   it "has a version number" do
-    expect(Resque::Scheduler::Failover::VERSION).not_to be nil
+    expect(Resque::Scheduler::RollingRestart::VERSION).not_to be nil
   end
 
   describe 'not master' do

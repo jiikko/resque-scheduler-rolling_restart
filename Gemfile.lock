@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    resque-scheduler-failover (0.1.0)
+    resque-scheduler-rolling_restart (0.1.0)
       redis (< 4)
       resque-scheduler
 
@@ -77,7 +77,7 @@ DEPENDENCIES
   bundler (~> 1.16)
   pry
   rake (~> 10.0)
-  resque-scheduler-failover!
+  resque-scheduler-rolling_restart!
   rspec (~> 3.0)
 
 BUNDLED WITH

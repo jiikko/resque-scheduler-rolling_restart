@@ -1,4 +1,4 @@
-# Resque::Schedulebr::Failover
+# Resque::Schedulebr::RollingRestart
 resque-scheduler を2プロセスで動かして冗長化している時に、herokuだとその2プロセスでSIGTERMを同時に受けることがある(デプロイとか日時再起動)ので。そういう時にresque-schedulerの2プロセスを順番に再起動するgemです。
 
 # Requirement
@@ -10,7 +10,7 @@ resque-scheduler を2プロセスで動かして冗長化している時に、he
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'resque-scheduler-failover'
+gem 'resque-scheduler-rolling_restart'
 ```
 
 And then execute:
@@ -19,12 +19,12 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install resque-scheduler-failover
+    $ gem install resque-scheduler-rolling_restart
 
 ## Usage
 ```lib/resque-scheduler.rb
 require 'resque-scheduler'
-require "resque-scheduler-failover"
+require "resque-scheduler-rolling_restart"
 Resque.redis = ENV['REDIS_URL'] || 'redis://localhost:6379/'
 Resque.schedule = YAML.load_file("config/resque_schedule.yml")
 ```

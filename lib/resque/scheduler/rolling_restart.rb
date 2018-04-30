@@ -1,6 +1,6 @@
 module Resque
   module Scheduler
-    module Failover
+    module RollingRestart
       module Status
         def waiting_for_next_master?
           self.current_status == :waiting_for_next_master
@@ -53,7 +53,7 @@ module Resque
         end
 
       def before_shutdown
-        log('starting overrided before_shutdown by resque-schedulebr-failover')
+        log('starting overrided before_shutdown by resque-schedulebr-rolling_restart')
         if master_lock.locked?
           release_master_lock
           updat_status!(:waiting_for_next_master)

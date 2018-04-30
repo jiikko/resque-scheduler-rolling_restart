@@ -1,6 +1,6 @@
 module Resque
   module Scheduler
-    module Failover
+    module RollingRestart
       VERSION = "0.1.0"
     end
   end

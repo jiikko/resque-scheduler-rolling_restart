@@ -1,16 +1,16 @@
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "resque/scheduler/failover/version"
+require "resque/scheduler/rolling_restart/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "resque-scheduler-failover"
-  spec.version       = Resque::Scheduler::Failover::VERSION
+  spec.name          = "resque-scheduler-rolling_restart"
+  spec.version       = Resque::Scheduler::RollingRestart::VERSION
   spec.authors       = ["jiikko"]
   spec.email         = ["n905i.1214@gmail.com"]
 
-  spec.summary       = %q{this gem is to failover for resque-scheduler.}
+  spec.summary       = %q{this gem is to rolling_restart for resque-scheduler.}
   spec.description   = spec.summary
-  spec.homepage      = 'https://github.com/jiikko/resque-scheduler-failover'
+  spec.homepage      = 'https://github.com/jiikko/resque-scheduler-rolling_restart'
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
