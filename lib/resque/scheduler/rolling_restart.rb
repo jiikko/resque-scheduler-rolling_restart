@@ -60,6 +60,7 @@ module Resque
         # if found_next_master? && #{get loaded_values to redis}
         #   update_status(:loaded_schedule_at_next_master)
         #   del loaded_values from redis
+        #   stop_rufus_scheduler
         # end
         val
       end
